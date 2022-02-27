@@ -7,20 +7,28 @@ import kotlin.concurrent.thread
 
 class MainViewModel: ViewModel() {
 
-    var mName = MutableLiveData<String>()
+    var mWeatherObjects = MutableLiveData<ArrayList<WeatherObject>>()
 
     init {
-        mName.postValue("Starting value")
+        mWeatherObjects.postValue(arrayListOf(
+            WeatherObject("Pisa", 28.0),
+            WeatherObject("Milan", 19.0),
+            WeatherObject("Melbourne", 32.0)
+        ))
     }
 
-    fun getName(): LiveData<String> {
-        return mName
+    fun getWeatherObjects(): LiveData<ArrayList<WeatherObject>> {
+        return mWeatherObjects
     }
 
-    fun suggestName() {
+    fun suggestLocations() {
         thread {
             Thread.sleep(5000)
-            mName.postValue("Modified value")
+            mWeatherObjects.postValue(arrayListOf(
+                WeatherObject("Sydney", 12.0),
+                WeatherObject("Paris", 44.0),
+                WeatherObject("London", 99.0)
+            ))
         }
     }
 }

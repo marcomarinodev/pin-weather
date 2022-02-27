@@ -3,9 +3,10 @@ package com.mamarino.pinweather
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ListView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,16 +14,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView = findViewById<TextView>(R.id.textView)
-        val button = findViewById<Button>(R.id.button)
+
+        val weatherListView = findViewById<ListView>(R.id.weatherList)
+        val addWeatherButton = findViewById<FloatingActionButton>(R.id.addWeatherButton)
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        viewModel.getName().observe(this, Observer<String> { newName ->
-            textView.text = newName
+        viewModel.getWeatherObjects().observe(this, Observer<ArrayList<WeatherObject>> { newWeatherObject ->
+            weatherListView.adapter = WeatherListAdapter(this, newWeatherObject)
         })
 
-        button.setOnClickListener {
-            viewModel.suggestName()
+        addWeatherButton.setOnClickListener {
+            viewModel.suggestLocations()
         }
     }
 }
