@@ -1,5 +1,5 @@
 # pin-weather
-Android native mobile application with the idea to share current weather on a specific location 
+Android client that allows users to share photos of a specific location in order to show weather info
 
 ## Architecture
 <img src="architecture.png" alt="drawing" height="500"/>
