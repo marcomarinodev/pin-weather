@@ -1,8 +1,10 @@
 package com.mamarino.pinweather.model
 
-class WeatherObject (
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class WeatherObject (
     val id: Long,
     val cityName: String?,
-//    val countryName: String?,
-
-    val temp: Double?)
+    val temp: Double?
+    )

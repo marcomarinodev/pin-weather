@@ -10,6 +10,7 @@ class MainViewModel: ViewModel() {
 
     var mWeatherObjects = MutableLiveData<ArrayList<WeatherObject>>()
     var mWeatherList = ArrayList<WeatherObject>()
+    var mSelectedWeatherObject = MutableLiveData<Long>()
 
     init {
         mWeatherList = arrayListOf(
@@ -22,6 +23,10 @@ class MainViewModel: ViewModel() {
 
     fun getWeatherObjects(): LiveData<ArrayList<WeatherObject>> {
         return mWeatherObjects
+    }
+
+    fun getSelectedWeatherObject() : LiveData<Long> {
+        return mSelectedWeatherObject
     }
 
     fun suggestLocations() {

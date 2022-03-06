@@ -2,6 +2,7 @@ package com.mamarino.pinweather.view.adapters
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.mamarino.pinweather.R
 import com.mamarino.pinweather.model.WeatherObject
+import com.mamarino.pinweather.view.activities.DetailedWeatherActivity
 import com.mamarino.pinweather.view.utils.RemoveDialog
 import com.mamarino.pinweather.viewmodels.MainViewModel
 
@@ -48,6 +50,10 @@ class WeatherListAdapter(
         fun bind(weatherObject: WeatherObject) {
             cityTextView.text = weatherObject.cityName
             tempTextView.text = weatherObject.temp.toString()
+
+            itemView.setOnClickListener {
+                viewModel.mSelectedWeatherObject.value = weatherObject.id
+            }
 
             // row behaviours handler
             itemView.setOnLongClickListener {

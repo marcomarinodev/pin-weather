@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PinWeather">
         <activity
+            android:name=".view.activities.DetailedWeatherActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.MainActivity"
             android:exported="true">
             <intent-filter>
