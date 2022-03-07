@@ -31,7 +31,7 @@ class MainViewModel: ViewModel() {
 
     fun suggestLocations() {
         thread {
-            Thread.sleep(2000)
+            // Thread.sleep(2000)
             mWeatherList.add(WeatherObject(21, "Sydney", 36.0))
             mWeatherObjects.postValue(mWeatherList)
         }
