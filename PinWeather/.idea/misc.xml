@@ -3,18 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.206" />
-        <entry key="app/src/main/res/drawable/circle.xml" value="0.142" />
-        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2075" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.206" />
-        <entry key="app/src/main/res/layout/activity_detailed_weather.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/detail_fragment.xml" value="0.365036231884058" />
-        <entry key="app/src/main/res/layout/detail_view2_activity.xml" value="0.365036231884058" />
-        <entry key="app/src/main/res/layout/detail_weather_fragment.xml" value="0.365036231884058" />
-        <entry key="app/src/main/res/layout/fragment_add_weather_entry.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/weather_custom_list_item.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/weather_detail_view_activity.xml" value="0.365036231884058" />
+        <entry key="../../../../../layout/compose-model-1654245472302.xml" value="0.22550675675675674" />
+        <entry key="../../../../../layout/compose-model-1654951127358.xml" value="0.22508445945945946" />
+        <entry key="../../../../../layout/compose-model-1654951252431.xml" value="0.3527777777777778" />
+        <entry key="../../../../../layout/compose-model-1654951642528.xml" value="0.12314814814814815" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1365" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1365" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1365" />
+        <entry key="app/src/main/res/drawable/ic_map.xml" value="0.1365" />
+        <entry key="app/src/main/res/drawable/ic_post.xml" value="0.1365" />
+        <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1" />
       </map>
     </option>
   </component>
