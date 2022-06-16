@@ -1,0 +1,29 @@
+{
+  "name": "weatherserversample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev --poll index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "express.js": "^1.0.0",
+    "fs": "^0.0.1-security",
+    "graphql": "^15.8.0",
+    "md5": "^2.3.0",
+    "mysql": "^2.18.1",
+    "sqlite3": "^5.0.8",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.4",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.21",
+    "@types/uuid": "^8.3.4"
+  }
+}
