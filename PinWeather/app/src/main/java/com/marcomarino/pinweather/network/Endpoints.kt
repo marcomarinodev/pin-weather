@@ -4,6 +4,10 @@ import com.marcomarino.pinweather.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
+/**
+ * This interface represents a clean API to retrieve and post information
+ * to the PINWeather Server.
+ */
 interface API {
 
     companion object {

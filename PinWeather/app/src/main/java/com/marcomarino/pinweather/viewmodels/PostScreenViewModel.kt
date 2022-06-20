@@ -3,6 +3,7 @@ package com.marcomarino.pinweather.viewmodels
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marcomarino.pinweather.network.API
@@ -21,16 +22,16 @@ class PostScreenViewModel(private val repo: PostRepository): ViewModel() {
     private val _longitudeError = MutableStateFlow<String>("")
     val longitudeError: StateFlow<String> = _longitudeError
 
-    fun sendLocation(bitmap: String, lat: Float, long: Float) {
+    fun sendLocation(bitmap: String, lat: Float, long: Float, onCompleted: () -> Unit) {
         NetworkUtility.handleCall {
             viewModelScope.launch {
-
                 repo.addPost(
                     bitmap,
                     lat,
                     long
                 )
 
+                onCompleted()
             }
         }
     }

@@ -29,7 +29,7 @@ class MainActivity: ComponentActivity() {
 
     }
 
-    val REQUEST_IMAGE_CAPTURE = 1
+    private val REQUEST_IMAGE_CAPTURE = 1
 
     private fun dispatchTakePictureIntent() {
         println("Dispatching...")
@@ -46,6 +46,7 @@ class MainActivity: ComponentActivity() {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             SessionManager._imageBitmap.value = imageBitmap
+            Log.i("CAMERA", "Camera intent has returned and image was stored")
         }
     }
 

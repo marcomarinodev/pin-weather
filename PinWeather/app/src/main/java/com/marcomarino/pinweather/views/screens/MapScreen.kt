@@ -4,10 +4,12 @@ import android.net.Network
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.CameraPosition
@@ -64,7 +66,7 @@ fun MapScreen(vm: MapScreenViewModel) {
         }
 
         GoogleMap(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(bottom = SessionManager.bottomNavigationHeight.dp),
             cameraPositionState = cameraPositionState,
         ) {
             markers.forEach { marker ->

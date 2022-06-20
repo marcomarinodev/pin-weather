@@ -19,9 +19,10 @@ import com.marcomarino.pinweather.network.repositories.AccountRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.lang.ref.WeakReference
 
 class SignUpViewModel(
-    val context: Context,
+    val context: WeakReference<Context>,
     private val repo: AccountRepository
 ): ViewModel() {
 
@@ -62,7 +63,7 @@ class SignUpViewModel(
         NetworkUtility.handleCall {
             viewModelScope.launch {
 
-                val result = repo.makeRequest(
+                val result = repo.accessRequest(
                     baseURL = API.AccountAPI.SIGNUP_URL,
                     fullName = fullName,
                     email = email,
@@ -94,6 +95,6 @@ class SignUpViewModel(
     }
 
     private fun presentHome() {
-        context.startActivity(Intent(context, MainActivity::class.java))
+        context.get()?.startActivity(Intent(context.get(), MainActivity::class.java))
     }
 }

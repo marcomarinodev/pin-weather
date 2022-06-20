@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.marcomarino.pinweather.R
+import com.marcomarino.pinweather.model.SessionManager
 import com.marcomarino.pinweather.navigation.Routes
 import com.marcomarino.pinweather.routers.InternalRouter
 import com.marcomarino.pinweather.viewmodels.HomeViewModel
@@ -61,7 +62,8 @@ fun MainScreen(
                 }
             },
             bottomBar = { BottomNavigationBar(navController = internalNavController) }
-        ) {
+        ) { innerPadding ->
+            SessionManager.bottomNavigationHeight = innerPadding.calculateBottomPadding().value
             InternalRouter(
                 currentInternalScreen,
                 context = context,

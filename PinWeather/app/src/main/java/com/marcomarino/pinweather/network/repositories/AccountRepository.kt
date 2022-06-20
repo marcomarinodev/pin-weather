@@ -17,28 +17,35 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 /**
- * A repository class provides a clean API for data access to the
- * rest of the application.
+ * A repository class provides an API for data access to the
+ * rest of the application. In this case I developed this repository
+ * to handle access requests and token validation if you got one
+ * inside your local db.
  */
 class AccountRepository(private val userDefaultDao: UserDefaultDao) {
 
+    // Retrofit Account API instance to make network calls
     private val accountAPI: API.AccountAPI = RetrofitHelper.getInstance().create(API.AccountAPI::class.java)
 
     /***
      * If credentials are valid, it gives back a token. With this token
-     * you can complete all operations.
+     * you can achieve all operations. This function is suspendable and it
+     * can only be executed inside a coroutine or another suspend function
+     * again.
      */
-    suspend fun makeRequest(
+    suspend fun accessRequest(
         baseURL: String,
         fullName: String = "",
         email: String,
         password: String
     ): User? {
 
+        // Compiling the url request
         val url = NetworkUtility.compileAccessUrl(
             baseURL = baseURL,
             fullName = fullName,
@@ -46,47 +53,47 @@ class AccountRepository(private val userDefaultDao: UserDefaultDao) {
             password = password
         )
 
-        Log.i("NET-CALL", url)
+        // The network call
+        Log.i("NET-CALL", "Sending request at $url")
         val result = accountAPI.access(url)
 
-        Log.i("NET-CALL", result.body().toString())
+        Log.i("NET-CALL", "Receiving: ${result.body().toString()}")
+        val data = result.body()?.data
 
-        return if (result.body()?.data?.login == null) {
-            result.body()?.data?.registerUser
-        } else result.body()?.data?.login
+        return data?.login ?: data?.registerUser
     }
 
     suspend fun validateToken(baseURL: String, callback: () -> Unit) {
-        withContext(Dispatchers.IO) {
-            val token = getToken()
-            val url = NetworkUtility.compileValidationUrl(baseURL, token)
-            val result = accountAPI.validateToken(url)
+        Log.i("TOKEN", "Validating token in thread ${Thread.currentThread().name}")
+        val token = getToken()
+        val url = NetworkUtility.compileValidationUrl(baseURL, token)
+        val result = accountAPI.validateToken(url)
 
-            if (result.body()?.data?.validateToken == true) {
-                SessionManager.token = token
-                callback()
-            } else {
-                println("Invalid token")
-            }
+        if (result.body()?.data?.validateToken == true) {
+            SessionManager.token = token
+            Log.i("TOKEN", "Executing return callback")
+            callback()
+        } else {
+            Log.i("TOKEN", "Invalid token")
         }
     }
 
-    @Suppress("RedundantSuspendModifier")
     @WorkerThread // room executes suspend queries off the main thread
     suspend fun insert(user: UserDefault) {
         userDefaultDao.insertUser(user)
     }
 
     @WorkerThread
-    fun getToken(): String {
-        val token = userDefaultDao.getLocalToken()
-        SessionManager.token = token ?: ""
-        println("token: $token")
-        return token ?: ""
+    suspend fun cleanUserDefaults() {
+        userDefaultDao.deleteCurrentUser()
     }
 
     @WorkerThread
-    fun getTableSize(): Int {
-        return userDefaultDao.tableSize()
+    fun getToken(): String {
+        val token = userDefaultDao.getLocalToken()
+        SessionManager.token = token ?: ""
+        Log.i("TOKEN", "Current token: $token")
+        return token ?: ""
     }
+
 }

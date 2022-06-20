@@ -13,10 +13,13 @@ import com.marcomarino.pinweather.model.entities.UserDefault
 import com.marcomarino.pinweather.network.API
 import com.marcomarino.pinweather.network.NetworkUtility
 import com.marcomarino.pinweather.network.repositories.AccountRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.ref.WeakReference
 
 class LoginViewModel(
-    val context: Context,
+    val context: WeakReference<Context>,
     private val repo: AccountRepository
     ): ViewModel() {
 
@@ -26,22 +29,22 @@ class LoginViewModel(
         // first, validate the token
         // if token is valid then present home directly
         NetworkUtility.handleCall {
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO) {
+                Log.i("TOKEN", "Calling the token in thread ${Thread.currentThread().name}")
                 repo.validateToken(API.AccountAPI.VALIDATE_TOKEN_URL) {
+                    // callback if success
                     presentHome()
                 }
             }
         }
     }
 
-    fun insertUserDefaults(user: UserDefault) = viewModelScope.launch {
-        repo.insert(user)
-    }
-
     fun login(email: String, password: String) {
         NetworkUtility.handleCall {
-            viewModelScope.launch {
-                val result = repo.makeRequest(
+            viewModelScope.launch(Dispatchers.IO) {
+
+                Log.i("LOG-IN", "Called LogIn in thread ${Thread.currentThread().name}")
+                val result = repo.accessRequest(
                     baseURL = API.AccountAPI.LOGIN_URL,
                     email = email,
                     password = password
@@ -52,8 +55,10 @@ class LoginViewModel(
                 } else {
                     errorMessage = ""
 
-                    // insertUserDefaults(user = UserDefault((result,)))
                     Log.i("USER-ACCESS", result.fullName)
+
+                    // clean user defaults from previous access
+                    repo.cleanUserDefaults()
 
                     // saving user token
                     repo.insert(
@@ -74,7 +79,7 @@ class LoginViewModel(
     }
 
     private fun presentHome() {
-        context.startActivity(Intent(context, MainActivity::class.java))
+        context.get()?.startActivity(Intent(context.get(), MainActivity::class.java))
     }
 
 }

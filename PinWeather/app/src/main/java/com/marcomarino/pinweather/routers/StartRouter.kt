@@ -12,14 +12,15 @@ import com.marcomarino.pinweather.viewmodels.LoginViewModel
 import com.marcomarino.pinweather.viewmodels.SignUpViewModel
 import com.marcomarino.pinweather.views.screens.LoginScreen
 import com.marcomarino.pinweather.views.screens.SignUpScreen
+import java.lang.ref.WeakReference
 
 @Composable
 fun StartRouter(context: Context, userDefaultDao: UserDefaultDao) {
 
     val navController = rememberNavController()
     val accountRepository = AccountRepository(userDefaultDao = userDefaultDao)
-    val loginViewModel = LoginViewModel(context, accountRepository)
-    val signUpViewModel = SignUpViewModel(context, accountRepository)
+    val loginViewModel = LoginViewModel(WeakReference(context), accountRepository)
+    val signUpViewModel = SignUpViewModel(WeakReference(context), accountRepository)
 
     NavHost(navController = navController, startDestination = Routes.Login.route) {
 

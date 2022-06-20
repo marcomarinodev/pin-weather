@@ -1,50 +1,16 @@
 {
   "data": [
     {
-      "id": "e2932ab8-6304-4ae8-a9b8-52bc173d5534",
+      "id": "3da297dc-ec25-4568-876a-bcd2f4cbbf93",
       "favourites": [
-        1,
-        3
-      ],
-      "posts": [],
-      "fullName": "Marco",
-      "email": "email",
-      "password": "pax",
-      "token": "3cd6770a-c06f-4f56-8fd2-a351cc131f9a"
-    },
-    {
-      "id": "12882429-3292-4e14-98a7-fa531d74c09e",
-      "favourites": [
-        1,
-        2,
-        4
-      ],
-      "posts": [],
-      "fullName": "Father",
-      "email": "mail@mail.it",
-      "password": "aA1!ciao",
-      "token": "c2614d2e-113e-4e98-9227-af95522ae871"
-    },
-    {
-      "id": "21a3bcb0-cd5e-4e9b-b3e5-940255e2d54e",
-      "favourites": [],
-      "posts": [],
-      "fullName": "mother",
-      "email": "mother@mother.it",
-      "password": "aA1!ciao",
-      "token": "b6dc97b5-74b4-4ef9-b8de-2651d0b44b99"
-    },
-    {
-      "id": "3b944242-bac4-4220-9127-ddd09ad80055",
-      "favourites": [
-        8,
+        4,
         9
       ],
       "posts": [],
-      "fullName": "France",
-      "email": "france@gmail.com",
+      "fullName": "Marco",
+      "email": "email@email.it",
       "password": "aA1!ciao",
-      "token": "99a77933-013c-41dc-956e-d08ad9b9d4ce"
+      "token": "8703ed1f-02a7-477e-9dca-a4d129207c32"
     }
   ]
 }

@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutorService
 
 object SessionManager {
     lateinit var locationsDao: LocationsDao
+    var bottomNavigationHeight: Float = 56.0F
     var token = ""
     lateinit var takePictureIntentDispatcher: () -> Unit
     val _imageBitmap = MutableStateFlow<Bitmap?>(null)
