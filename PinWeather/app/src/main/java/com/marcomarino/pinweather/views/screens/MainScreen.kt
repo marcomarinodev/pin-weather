@@ -33,10 +33,9 @@ fun MainScreen(
 
     val internalNavController = rememberNavController()
     val currentInternalScreen = remember { mutableStateOf("") }
-    val isRefreshing by homeViewModel.isRefreshing.collectAsState()
 
     SwipeRefresh (
-        state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
+        state = rememberSwipeRefreshState(isRefreshing = homeViewModel.isRefreshing.value),
         onRefresh = { homeViewModel.call() }
     ) {
 

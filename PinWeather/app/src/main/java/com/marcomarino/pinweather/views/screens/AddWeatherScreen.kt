@@ -1,5 +1,6 @@
 package com.marcomarino.pinweather.views.screens
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
@@ -11,6 +12,7 @@ import com.marcomarino.pinweather.viewmodels.AddWeatherViewModel
 import com.marcomarino.pinweather.views.components.SearchBar
 import com.marcomarino.pinweather.views.components.WeatherCardList
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AddWeatherScreen(
     internalNavController: NavHostController,
@@ -25,7 +27,7 @@ fun AddWeatherScreen(
             SearchBar("Search by city name", state = queryState, onValueChanged = {
                 vm.searchEntry(weatherListState, queryState.value.text)
             })
-        }
+        },
     ) {
         WeatherCardList(entries = weatherListState, context = context) { weatherEntry ->
             vm.addFavouriteEntry(weatherEntry.id, onCompletion = {

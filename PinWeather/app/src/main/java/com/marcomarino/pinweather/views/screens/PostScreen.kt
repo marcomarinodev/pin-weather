@@ -27,15 +27,7 @@ import com.marcomarino.pinweather.views.components.FormField
 @Composable
 fun PostScreen(vm: PostScreenViewModel) {
 
-    val viewModel = remember { vm }
     val imageBitmap by SessionManager.imageBitmap.collectAsState()
-
-    val latitudeState = remember { mutableStateOf(TextFieldValue()) }
-    // by means that getter and setter depends on state
-    val latitudeError by viewModel.latitudeError.collectAsState()
-
-    val longitudeState = remember { mutableStateOf(TextFieldValue()) }
-    val longitudeError by viewModel.longitudeError.collectAsState()
 
     val openDialog = remember { mutableStateOf(false) }
 
@@ -136,10 +128,12 @@ fun PostScreen(vm: PostScreenViewModel) {
                     FormField(
                         label = "Latitude",
                         modifier = Modifier.fillMaxWidth(),
-                        textState = latitudeState,
-                        error = latitudeError,
+                        textState = vm.latitudeState,
+                        error = vm.latitudeError.value,
                         keyboardType = KeyboardType.Number,
-                        onValueChanged = {}
+                        onValueChanged = {
+                            vm.checkLatitude()
+                        }
                     )
 
                     Spacer(modifier = Modifier.height(20.dp))
@@ -147,20 +141,22 @@ fun PostScreen(vm: PostScreenViewModel) {
                     FormField(
                         label = "Longitude",
                         modifier = Modifier.fillMaxWidth(),
-                        textState = longitudeState,
-                        error = longitudeError,
+                        textState = vm.longitudeState,
+                        error = vm.longitudeError.value,
                         keyboardType = KeyboardType.Number,
-                        onValueChanged = {}
+                        onValueChanged = {
+                            vm.checkLongitude()
+                        }
                     )
 
                     Spacer(modifier = Modifier.height(20.dp))
 
                     Button(
                         onClick = {
-                            viewModel.sendLocation(
-                                viewModel.encodeImage(imageBitmap),
-                                latitudeState.value.text.toFloat(),
-                                longitudeState.value.text.toFloat()
+                            vm.sendLocation(
+                                PostScreenViewModel.encodeImage(imageBitmap),
+                                vm.latitudeState.value.text.toFloat(),
+                                vm.longitudeState.value.text.toFloat()
                             ) { // on completed
                                 openDialog.value = true
                                 SessionManager._imageBitmap.value = null
@@ -170,6 +166,7 @@ fun PostScreen(vm: PostScreenViewModel) {
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = colorResource(id = R.color.background)
                         ),
+                        enabled = vm.saveButtonState.value,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp)

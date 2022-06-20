@@ -12,6 +12,7 @@ class WeatherListRepository(private val token: String) {
     private val weatherAPI: API.WeatherAPI = RetrofitHelper.getInstance().create(API.WeatherAPI::class.java)
 
     suspend fun makeRequest(baseURL: String): List<WeatherEntry> {
+        Log.i("NET-CALL", "Weather list request performed in thread ${Thread.currentThread().name}")
         val url = NetworkUtility.compileValidationUrl(baseURL, token)
 
         // launching a new coroutine

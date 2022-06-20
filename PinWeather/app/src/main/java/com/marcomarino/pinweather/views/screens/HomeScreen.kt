@@ -1,7 +1,6 @@
 package com.marcomarino.pinweather.views.screens
 
 import android.content.Context
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -22,28 +21,41 @@ fun HomeScreen(context: Context, vm: HomeViewModel) {
 
     val openDialog = remember { mutableStateOf(false) }
     val selectedEntry = remember { mutableStateOf("") }
+    val isLoading = remember { vm.isLoading }
     
     LaunchedEffect(Unit, block = {
         vm.call()
     })
     
-    Box {
-        if (vm.errorMessage.isEmpty()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .fillMaxHeight(),
+        contentAlignment = Alignment.Center
+    ) {
+
+        if (isLoading.value) {
+            CircularProgressIndicator(color = colorResource(id = R.color.primary))
+        }
+
+        if (vm.errorMessage.value.isEmpty() && !isLoading.value) {
             WeatherCardList(entries = vm.weatherList, context = context, onSelected = { weatherEntry ->
                 selectedEntry.value = weatherEntry.id
                 openDialog.value = true
             })
         } else {
-            Text(vm.errorMessage)
+            Text(vm.errorMessage.value)
         }
-        
+
         if (openDialog.value) {
             AlertDialog(
                 onDismissRequest = { openDialog.value = false },
                 title = { Text("Do you want to remove this item?") },
                 buttons = {
                     Row(
-                        modifier = Modifier.padding(all = 8.dp).fillMaxWidth(),
+                        modifier = Modifier
+                            .padding(all = 8.dp)
+                            .fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Button(

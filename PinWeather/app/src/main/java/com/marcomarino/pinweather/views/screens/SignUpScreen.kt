@@ -1,5 +1,6 @@
 package com.marcomarino.pinweather.views.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -28,6 +29,7 @@ fun SignUpScreen(navController: NavHostController, vm: SignUpViewModel) {
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SignUpView(navController: NavHostController, vm: SignUpViewModel) {
 
