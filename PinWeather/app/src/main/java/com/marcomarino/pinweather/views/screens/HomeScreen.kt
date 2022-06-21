@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,8 +20,8 @@ import com.marcomarino.pinweather.views.components.WeatherCardList
 @Composable
 fun HomeScreen(context: Context, vm: HomeViewModel) {
 
-    val openDialog = remember { mutableStateOf(false) }
-    val selectedEntry = remember { mutableStateOf("") }
+    val openDialog = rememberSaveable { mutableStateOf(false) }
+    val selectedEntry = rememberSaveable { mutableStateOf("") }
     val isLoading = remember { vm.isLoading }
     
     LaunchedEffect(Unit, block = {

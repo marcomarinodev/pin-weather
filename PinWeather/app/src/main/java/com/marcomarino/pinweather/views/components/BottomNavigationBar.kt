@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,7 +22,7 @@ fun BottomNavigationBar(navController: NavController) {
         Routes.Maps,
         Routes.Post
     )
-    var selectedItem = remember { mutableStateOf(Routes.Home.route) }
+    var selectedItem = rememberSaveable { mutableStateOf(Routes.Home.route) }
 
     BottomNavigation(
         backgroundColor = colorResource(id = R.color.background),
