@@ -6,7 +6,8 @@ import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.marcomarino.pinweather.MainActivity
 import com.marcomarino.pinweather.model.SessionManager
 import com.marcomarino.pinweather.model.entities.UserDefault
@@ -14,7 +15,6 @@ import com.marcomarino.pinweather.network.API
 import com.marcomarino.pinweather.network.NetworkUtility
 import com.marcomarino.pinweather.network.repositories.AccountRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 

@@ -1,19 +1,13 @@
 package com.marcomarino.pinweather.routers
 
 import android.content.Context
-import android.se.omapi.Session
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.google.maps.android.compose.GoogleMap
 import com.marcomarino.pinweather.model.SessionManager
-import com.marcomarino.pinweather.model.dao.UserDefaultDao
-import com.marcomarino.pinweather.model.entities.UserDefault
 import com.marcomarino.pinweather.navigation.Routes
-import com.marcomarino.pinweather.network.repositories.AccountRepository
 import com.marcomarino.pinweather.network.repositories.PostRepository
 import com.marcomarino.pinweather.network.repositories.WeatherListRepository
 import com.marcomarino.pinweather.viewmodels.AddWeatherViewModel

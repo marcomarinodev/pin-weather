@@ -1,7 +1,6 @@
 package com.marcomarino.pinweather.network.repositories
 
 import android.util.Log
-import com.marcomarino.pinweather.model.WeatherEntries
 import com.marcomarino.pinweather.model.WeatherEntry
 import com.marcomarino.pinweather.network.API
 import com.marcomarino.pinweather.network.NetworkUtility

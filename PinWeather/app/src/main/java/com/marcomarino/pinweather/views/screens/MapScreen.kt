@@ -1,6 +1,5 @@
 package com.marcomarino.pinweather.views.screens
 
-import android.net.Network
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.compose.foundation.Image
@@ -20,20 +19,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.*
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 import com.marcomarino.pinweather.R
 import com.marcomarino.pinweather.model.SessionManager
-import com.marcomarino.pinweather.model.WeatherEntry
-import com.marcomarino.pinweather.model.entities.DetailedLocation
 import com.marcomarino.pinweather.model.entities.LightLocation
-import com.marcomarino.pinweather.network.NetworkUtility
 import com.marcomarino.pinweather.viewmodels.PostScreenViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
-import java.util.*
 
 class MapScreenViewModel: ViewModel() {
 

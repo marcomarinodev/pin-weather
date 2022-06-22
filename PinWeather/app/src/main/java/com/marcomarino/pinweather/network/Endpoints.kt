@@ -1,8 +1,13 @@
 package com.marcomarino.pinweather.network
 
-import com.marcomarino.pinweather.model.*
+import com.marcomarino.pinweather.model.AccountLoginToken
+import com.marcomarino.pinweather.model.PostResponse
+import com.marcomarino.pinweather.model.TokenValidation
+import com.marcomarino.pinweather.model.WeatherList
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Url
 
 /**
  * This interface represents a clean API to retrieve and post information

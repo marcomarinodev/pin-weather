@@ -1,6 +1,7 @@
 package com.marcomarino.pinweather.viewmodels
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marcomarino.pinweather.model.WeatherEntry
@@ -10,7 +11,6 @@ import com.marcomarino.pinweather.network.repositories.WeatherListRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class HomeViewModel(private val repo: WeatherListRepository): ViewModel() {
 

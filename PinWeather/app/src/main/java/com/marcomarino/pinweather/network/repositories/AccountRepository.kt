@@ -2,24 +2,13 @@ package com.marcomarino.pinweather.network.repositories
 
 import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import com.marcomarino.pinweather.model.SessionManager
-import com.marcomarino.pinweather.model.Token
-import com.marcomarino.pinweather.model.TokenValidation
 import com.marcomarino.pinweather.model.User
 import com.marcomarino.pinweather.model.dao.UserDefaultDao
 import com.marcomarino.pinweather.model.entities.UserDefault
 import com.marcomarino.pinweather.network.API
 import com.marcomarino.pinweather.network.NetworkUtility
 import com.marcomarino.pinweather.network.RetrofitHelper
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.last
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Response
 
 /**
  * A repository class provides an API for data access to the

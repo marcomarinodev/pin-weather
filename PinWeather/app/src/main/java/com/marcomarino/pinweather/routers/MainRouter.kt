@@ -9,7 +9,6 @@ import com.marcomarino.pinweather.model.SessionManager
 import com.marcomarino.pinweather.navigation.Routes
 import com.marcomarino.pinweather.network.repositories.WeatherListRepository
 import com.marcomarino.pinweather.viewmodels.HomeViewModel
-import com.marcomarino.pinweather.views.screens.HomeScreen
 import com.marcomarino.pinweather.views.screens.MainScreen
 
 @Composable

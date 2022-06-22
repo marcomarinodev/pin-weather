@@ -10,7 +10,6 @@ import com.marcomarino.pinweather.network.API
 import com.marcomarino.pinweather.network.NetworkUtility
 import com.marcomarino.pinweather.network.repositories.WeatherListRepository
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class AddWeatherViewModel(private val repo: WeatherListRepository): ViewModel() {
 

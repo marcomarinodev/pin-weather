@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.StrictMode
-import android.util.Patterns.*
+import android.util.Patterns.EMAIL_ADDRESS
 import java.util.regex.Pattern
 
 class NetworkUtility {

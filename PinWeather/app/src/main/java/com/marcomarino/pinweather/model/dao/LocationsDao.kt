@@ -1,11 +1,10 @@
 package com.marcomarino.pinweather.model.dao
 
-import android.graphics.Bitmap
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.marcomarino.pinweather.model.entities.LightLocation
 import com.marcomarino.pinweather.model.entities.DetailedLocation
+import com.marcomarino.pinweather.model.entities.LightLocation
 
 @Dao
 interface LocationsDao {

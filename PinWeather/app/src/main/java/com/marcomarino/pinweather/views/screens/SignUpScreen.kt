@@ -4,7 +4,8 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
@@ -18,9 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.marcomarino.pinweather.R
 import com.marcomarino.pinweather.viewmodels.SignUpViewModel
-import com.marcomarino.pinweather.views.components.TopBar
 import com.marcomarino.pinweather.views.components.AppButton
 import com.marcomarino.pinweather.views.components.FormField
+import com.marcomarino.pinweather.views.components.TopBar
 
 @Composable
 fun SignUpScreen(navController: NavHostController, vm: SignUpViewModel) {
