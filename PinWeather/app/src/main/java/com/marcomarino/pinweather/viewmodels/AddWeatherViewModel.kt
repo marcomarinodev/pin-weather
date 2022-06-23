@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class AddWeatherViewModel(private val repo: WeatherListRepository): ViewModel() {
 
-    var errorMessage: String by mutableStateOf("")
+    private var errorMessage = mutableStateOf("")
 
     fun searchEntry(state: MutableList<WeatherEntry>, query: String) {
         viewModelScope.launch {
@@ -24,7 +24,7 @@ class AddWeatherViewModel(private val repo: WeatherListRepository): ViewModel() 
                         query
                     ))
             } catch (e: Exception) {
-                errorMessage = e.message.toString()
+                errorMessage.value = e.message.toString()
             }
         }
     }
@@ -35,7 +35,7 @@ class AddWeatherViewModel(private val repo: WeatherListRepository): ViewModel() 
                 val postResponse = repo.postFavEntry(API.WeatherAPI.ADD_FAV_ENTRY_URL, id)
                 onCompletion()
             } catch (e: Exception) {
-                errorMessage = e.message.toString()
+                errorMessage.value = e.message.toString()
             }
         }
     }

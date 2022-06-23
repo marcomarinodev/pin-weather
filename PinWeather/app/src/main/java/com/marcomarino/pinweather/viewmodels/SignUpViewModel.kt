@@ -26,35 +26,28 @@ class SignUpViewModel(
     private val repo: AccountRepository
 ): ViewModel() {
 
-    private val _fullNameError = MutableStateFlow<String>("")
-    val fullNameError: StateFlow<String> = _fullNameError
-
-    private val _emailError = MutableStateFlow<String>("")
-    val emailError: StateFlow<String> = _emailError
-
-    private val _passwordError = MutableStateFlow<String>("")
-    val passwordError: StateFlow<String> = _passwordError
-
-    private val _confirmPasswordError = MutableStateFlow<String>("")
-    val confirmPasswordError: StateFlow<String> = _confirmPasswordError
+    val fullNameError = mutableStateOf("")
+    val emailError = mutableStateOf("")
+    val passwordError = mutableStateOf("")
+    val confirmPasswordError = mutableStateOf("")
 
     var errorMessage: String by mutableStateOf("")
 
     fun onFullNameChanged(fullName: String) {
-        _fullNameError.value = if (fullName.isEmpty()) "Full name cannot be empty" else ""
+        fullNameError.value = if (fullName.isEmpty()) "Full name cannot be empty" else ""
     }
 
     fun onEmailChanged(email: String) {
-        _emailError.value = if (!email.isValidEmail()) "Invalid email" else ""
+        emailError.value = if (!email.isValidEmail()) "Invalid email" else ""
     }
 
     fun onPasswordChanged(password: String) {
-        _passwordError.value = if (!password.isValidPassword())
+        passwordError.value = if (!password.isValidPassword())
             "1 lowercase & uppercase character + 1 digit + 1 special character + size 8" else ""
     }
 
     fun onConfirmPasswordChanged(password: String, confirmPassword: String) {
-        _confirmPasswordError.value = if
+        confirmPasswordError.value = if
                 (confirmPassword != password)
                     "Confirmation password must be equal to new password" else ""
     }

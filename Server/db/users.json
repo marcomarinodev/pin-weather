@@ -2,9 +2,7 @@
   "data": [
     {
       "id": "3da297dc-ec25-4568-876a-bcd2f4cbbf93",
-      "favourites": [
-        4
-      ],
+      "favourites": [],
       "posts": [],
       "fullName": "Marco",
       "email": "email@email.it",
@@ -21,6 +19,15 @@
       "email": "kobe@bryant.com",
       "password": "aA1!ciao",
       "token": "78600c1f-e102-447f-bcaf-9a72565c42aa"
+    },
+    {
+      "id": "b3aa5263-f70f-4c47-b316-6a7f94d0203a",
+      "favourites": [],
+      "posts": [],
+      "fullName": "pippo",
+      "email": "pippo@email.it",
+      "password": "aA1!ciao",
+      "token": "4759feeb-8e25-49ba-8b31-9e5a9df01f6e"
     }
   ]
 }

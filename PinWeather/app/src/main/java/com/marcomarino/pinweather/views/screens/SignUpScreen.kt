@@ -37,19 +37,10 @@ fun SignUpScreen(navController: NavHostController, vm: SignUpViewModel) {
 @Composable
 fun SignUpView(navController: NavHostController, vm: SignUpViewModel) {
 
-    val viewModel = remember { vm }
-
     val fullName = remember { mutableStateOf(TextFieldValue()) }
-    val fullNameError by viewModel.fullNameError.collectAsState()
-
     val email = remember { mutableStateOf(TextFieldValue()) }
-    val emailError by viewModel.emailError.collectAsState()
-
     val password = remember { mutableStateOf(TextFieldValue()) }
-    val passwordError by viewModel.passwordError.collectAsState()
-
     val confirmPassword = remember { mutableStateOf(TextFieldValue()) }
-    val confirmPasswordError by viewModel.confirmPasswordError.collectAsState()
 
     Scaffold(
         topBar = {
@@ -93,10 +84,10 @@ fun SignUpView(navController: NavHostController, vm: SignUpViewModel) {
                 FormField(
                     label = "Full Name",
                     textState = fullName,
-                    error = fullNameError,
+                    error = vm.fullNameError.value,
                     keyboardType = KeyboardType.Text,
                     onValueChanged = {
-                        viewModel.onFullNameChanged(fullName = fullName.value.text)
+                        vm.onFullNameChanged(fullName = fullName.value.text)
                     }
                 )
 
@@ -106,10 +97,10 @@ fun SignUpView(navController: NavHostController, vm: SignUpViewModel) {
                 FormField(
                     label = "Email",
                     textState = email,
-                    error = emailError,
+                    error = vm.emailError.value,
                     keyboardType = KeyboardType.Email,
                     onValueChanged = {
-                        viewModel.onEmailChanged(email = email.value.text)
+                        vm.onEmailChanged(email = email.value.text)
                     }
                 )
 
@@ -119,10 +110,10 @@ fun SignUpView(navController: NavHostController, vm: SignUpViewModel) {
                 FormField(
                     label = "New Password",
                     textState = password,
-                    error = passwordError,
+                    error = vm.passwordError.value,
                     keyboardType = KeyboardType.Password,
                     onValueChanged = {
-                        viewModel.onPasswordChanged(password = password.value.text)
+                        vm.onPasswordChanged(password = password.value.text)
                     }
                 )
 
@@ -132,10 +123,10 @@ fun SignUpView(navController: NavHostController, vm: SignUpViewModel) {
                 FormField(
                     label = "Confirm Password",
                     textState = confirmPassword,
-                    error = confirmPasswordError,
+                    error = vm.confirmPasswordError.value,
                     keyboardType = KeyboardType.Password,
                     onValueChanged = {
-                        viewModel.onConfirmPasswordChanged(
+                        vm.onConfirmPasswordChanged(
                             password = password.value.text,
                             confirmPassword = confirmPassword.value.text
                         )
