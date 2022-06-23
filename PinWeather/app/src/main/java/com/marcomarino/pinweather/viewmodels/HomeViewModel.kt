@@ -23,7 +23,7 @@ class HomeViewModel(private val repo: WeatherListRepository): ViewModel() {
         isLoading.value = true
         NetworkUtility.handleCall { viewModelScope.launch(Dispatchers.IO) {
             try {
-                delay(1500)
+                delay(1000)
                 weatherList.clear()
                 weatherList.addAll(repo.makeRequest(API.WeatherAPI.ALL_ENTRIES_URL))
             } catch (e: Exception) {

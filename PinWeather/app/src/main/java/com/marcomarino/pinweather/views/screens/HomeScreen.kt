@@ -40,10 +40,14 @@ fun HomeScreen(context: Context, vm: HomeViewModel) {
         }
 
         if (vm.errorMessage.value.isEmpty() && !isLoading.value) {
-            WeatherCardList(entries = vm.weatherList, context = context, onSelected = { weatherEntry ->
-                selectedEntry.value = weatherEntry.id
-                openDialog.value = true
-            })
+            if (vm.weatherList.size > 0) {
+                WeatherCardList(entries = vm.weatherList, context = context, onSelected = { weatherEntry ->
+                    selectedEntry.value = weatherEntry.id
+                    openDialog.value = true
+                })
+            } else {
+                Text("Press + to add new cities")
+            }
         } else {
             Text(vm.errorMessage.value)
         }
