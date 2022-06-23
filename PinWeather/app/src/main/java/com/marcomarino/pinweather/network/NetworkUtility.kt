@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.os.StrictMode
 import android.util.Patterns.EMAIL_ADDRESS
 import java.util.regex.Pattern
 
@@ -19,7 +18,7 @@ class NetworkUtility {
         ): String {
             return baseURL
                 .replace(
-                    if (!fullName.isNullOrEmpty()) "{fullName}" else "",
+                    if (fullName.isNotEmpty()) "{fullName}" else "",
                     fullName
                 )
                 .replace("{email}", email)
@@ -54,20 +53,6 @@ class NetworkUtility {
                 .replace("{id}", id)
         }
 
-        fun compilePostOpUrl(
-            baseURL: String,
-            token: String,
-            bitmap: String,
-            lat: String,
-            lon: String
-        ): String {
-            return baseURL
-                .replace("{token}", token)
-                .replace("{bitmap}", bitmap)
-                .replace("{lat}", lat)
-                .replace("{lon}", lon)
-        }
-
         fun String.isValidEmail(): Boolean {
             return this.isNotEmpty() && EMAIL_ADDRESS.matcher(this).matches()
         }
@@ -84,7 +69,15 @@ class NetworkUtility {
             return this.isNotEmpty() && passwordPattern.matcher(this).matches()
         }
 
-        fun isNetworkConnected(context: Context): Boolean {
+        fun checkConnection(context: Context) : String? {
+            if (!isNetworkConnected(context)) {
+                return "Check your internet connection"
+            }
+
+            return null
+        }
+
+        private fun isNetworkConnected(context: Context): Boolean {
 
             // get connectivity manager from the context in parameter
             // we use the connectivity manager to query the state of network

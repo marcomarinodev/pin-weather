@@ -7,7 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marcomarino.pinweather.network.NetworkUtility
 import com.marcomarino.pinweather.network.repositories.PostRepository
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream

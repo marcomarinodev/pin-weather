@@ -105,9 +105,9 @@ fun LoginScreen(navController: NavHostController, vm: LoginViewModel) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        if (!vm.errorMessage.isNullOrEmpty()) {
+        if (!vm.errorMessage.value.isEmpty()) {
             Text(
-                text = vm.errorMessage,
+                text = vm.errorMessage.value,
                 style = TextStyle(
                     fontSize = 16.sp,
                     color = colorResource(id = R.color.error)

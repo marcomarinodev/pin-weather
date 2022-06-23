@@ -60,6 +60,12 @@ class SignUpViewModel(
     }
 
     fun register(fullName: String, email: String, password: String) {
+
+        if (context.get() != null) {
+            errorMessage = NetworkUtility.checkConnection(context.get()!!) ?: ""
+            if (errorMessage.isNotEmpty()) return
+        }
+
         viewModelScope.launch {
 
             val result = repo.accessRequest(

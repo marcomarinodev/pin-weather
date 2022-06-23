@@ -3,9 +3,7 @@ package com.marcomarino.pinweather.viewmodels
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marcomarino.pinweather.MainActivity
@@ -23,7 +21,7 @@ class LoginViewModel(
     private val repo: AccountRepository
     ): ViewModel() {
 
-    var errorMessage: String by mutableStateOf("")
+    var errorMessage = mutableStateOf("")
 
     init {
         // first, validate the token
@@ -38,9 +36,15 @@ class LoginViewModel(
     }
 
     fun login(email: String, password: String) {
+
+        if (context.get() != null) {
+            errorMessage.value = NetworkUtility.checkConnection(context = context.get()!!) ?: ""
+            if (errorMessage.value.isNotEmpty()) return
+        }
+
         viewModelScope.launch(Dispatchers.IO) {
 
-            Log.i("LOG-IN", "Called LogIn in thread ${Thread.currentThread().name}")
+            Log.i("LOG-IN", "Called LogInn in thread ${Thread.currentThread().name}")
             val result = repo.accessRequest(
                 baseURL = API.AccountAPI.LOGIN_URL,
                 email = email,
@@ -48,9 +52,9 @@ class LoginViewModel(
             )
 
             if (result == null) {
-                errorMessage = "Access failed!"
+                errorMessage.value = "Access failed!"
             } else {
-                errorMessage = ""
+                errorMessage.value = ""
 
                 Log.i("USER-ACCESS", result.fullName)
 

@@ -9,6 +9,7 @@ import com.marcomarino.pinweather.model.SessionManager
 import com.marcomarino.pinweather.routers.StartRouter
 
 class StartActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,4 +20,5 @@ class StartActivity : ComponentActivity() {
             StartRouter(this, (application as PinWeatherApplication).database.userDefaultDao())
         }
     }
+
 }

@@ -55,6 +55,9 @@ class AccountRepository(private val userDefaultDao: UserDefaultDao) {
     suspend fun validateToken(baseURL: String, callback: () -> Unit) {
         Log.i("TOKEN", "Validating token in thread ${Thread.currentThread().name}")
         val token = getToken()
+
+        if (token.isEmpty()) return
+
         val url = NetworkUtility.compileValidationUrl(baseURL, token)
         val result = accountAPI.validateToken(url)
 

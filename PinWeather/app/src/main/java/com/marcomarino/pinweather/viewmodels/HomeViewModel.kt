@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marcomarino.pinweather.model.WeatherEntry
 import com.marcomarino.pinweather.network.API
-import com.marcomarino.pinweather.network.NetworkUtility
 import com.marcomarino.pinweather.network.repositories.WeatherListRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -21,6 +20,7 @@ class HomeViewModel(private val repo: WeatherListRepository): ViewModel() {
 
     fun call() {
         isLoading.value = true
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 delay(1000)
@@ -34,6 +34,7 @@ class HomeViewModel(private val repo: WeatherListRepository): ViewModel() {
     }
 
     fun deleteFavEntry(id: String, onCompleted: () -> Unit) {
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repo.postFavEntry(API.WeatherAPI.DEL_FAV_ENTRY_URL, id)

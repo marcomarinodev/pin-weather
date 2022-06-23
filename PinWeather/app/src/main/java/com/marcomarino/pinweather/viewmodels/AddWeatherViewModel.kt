@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marcomarino.pinweather.model.WeatherEntry
 import com.marcomarino.pinweather.network.API
-import com.marcomarino.pinweather.network.NetworkUtility
 import com.marcomarino.pinweather.network.repositories.WeatherListRepository
 import kotlinx.coroutines.launch
 
