@@ -16,7 +16,7 @@ class AddWeatherViewModel(private val repo: WeatherListRepository): ViewModel() 
     var errorMessage: String by mutableStateOf("")
 
     fun searchEntry(state: MutableList<WeatherEntry>, query: String) {
-        NetworkUtility.handleCall { viewModelScope.launch {
+        viewModelScope.launch {
             try {
                 state.clear()
                 if (query.isNotEmpty())
@@ -27,18 +27,18 @@ class AddWeatherViewModel(private val repo: WeatherListRepository): ViewModel() 
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
-        } }
+        }
     }
 
     fun addFavouriteEntry(id: String, onCompletion: () -> Unit) {
-        NetworkUtility.handleCall { viewModelScope.launch {
+        viewModelScope.launch {
             try {
                 val postResponse = repo.postFavEntry(API.WeatherAPI.ADD_FAV_ENTRY_URL, id)
                 onCompletion()
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
-        }}
+        }
     }
 
 }

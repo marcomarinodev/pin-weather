@@ -26,17 +26,16 @@ class PostScreenViewModel(private val repo: PostRepository): ViewModel() {
     private var lonModified: Boolean = false
 
     fun sendLocation(bitmap: String, lat: Float, long: Float, onCompleted: () -> Unit) {
-        NetworkUtility.handleCall {
-            viewModelScope.launch {
-                repo.addPost(
-                    bitmap,
-                    lat,
-                    long
-                )
+        viewModelScope.launch {
+            repo.addPost(
+                bitmap,
+                lat,
+                long
+            )
 
-                onCompleted()
-            }
+            onCompleted()
         }
+
     }
 
     fun setSaveButton() {

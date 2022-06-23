@@ -68,12 +68,6 @@ class NetworkUtility {
                 .replace("{lon}", lon)
         }
 
-        fun handleCall(task: () -> Unit) {
-            val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-            StrictMode.setThreadPolicy(policy)
-            task()
-        }
-
         fun String.isValidEmail(): Boolean {
             return this.isNotEmpty() && EMAIL_ADDRESS.matcher(this).matches()
         }

@@ -21,7 +21,7 @@ class HomeViewModel(private val repo: WeatherListRepository): ViewModel() {
 
     fun call() {
         isLoading.value = true
-        NetworkUtility.handleCall { viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 delay(1000)
                 weatherList.clear()
@@ -30,17 +30,17 @@ class HomeViewModel(private val repo: WeatherListRepository): ViewModel() {
                 errorMessage.value = e.message.toString()
             }
             isLoading.value = false
-        } }
+        }
     }
 
     fun deleteFavEntry(id: String, onCompleted: () -> Unit) {
-        NetworkUtility.handleCall { viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 repo.postFavEntry(API.WeatherAPI.DEL_FAV_ENTRY_URL, id)
                 onCompleted()
             } catch (e: Exception) {
                 errorMessage.value = e.message.toString()
             }
-        } }
+        }
     }
 }

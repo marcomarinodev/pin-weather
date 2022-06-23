@@ -60,38 +60,37 @@ class SignUpViewModel(
     }
 
     fun register(fullName: String, email: String, password: String) {
-        NetworkUtility.handleCall {
-            viewModelScope.launch {
+        viewModelScope.launch {
 
-                val result = repo.accessRequest(
-                    baseURL = API.AccountAPI.SIGNUP_URL,
-                    fullName = fullName,
-                    email = email,
-                    password = password
+            val result = repo.accessRequest(
+                baseURL = API.AccountAPI.SIGNUP_URL,
+                fullName = fullName,
+                email = email,
+                password = password
+            )
+
+            if (result == null) {
+                errorMessage = "Registration failed!"
+            } else {
+                // We have to save the login token
+                errorMessage = ""
+                Log.i("USER-REG", result.fullName)
+
+                repo.insert(
+                    UserDefault(
+                        uuid = result.id,
+                        token = result.token,
+                        fullName = result.fullName,
+                        email = result.email
+                    )
                 )
 
-                if (result == null) {
-                    errorMessage = "Registration failed!"
-                } else {
-                    // We have to save the login token
-                    errorMessage = ""
-                    Log.i("USER-REG", result.fullName)
+                SessionManager.token = result.token
 
-                    repo.insert(
-                        UserDefault(
-                            uuid = result.id,
-                            token = result.token,
-                            fullName = result.fullName,
-                            email = result.email
-                        )
-                    )
-
-                    SessionManager.token = result.token
-
-                    presentHome()
-                }
+                presentHome()
             }
         }
+
     }
 
     private fun presentHome() {

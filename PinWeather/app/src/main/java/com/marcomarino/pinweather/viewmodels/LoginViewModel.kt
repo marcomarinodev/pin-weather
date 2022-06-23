@@ -28,52 +28,48 @@ class LoginViewModel(
     init {
         // first, validate the token
         // if token is valid then present home directly
-        NetworkUtility.handleCall {
-            viewModelScope.launch(Dispatchers.IO) {
-                Log.i("TOKEN", "Calling the token in thread ${Thread.currentThread().name}")
-                repo.validateToken(API.AccountAPI.VALIDATE_TOKEN_URL) {
-                    // callback if success
-                    presentHome()
-                }
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.i("TOKEN", "Calling the token in thread ${Thread.currentThread().name}")
+            repo.validateToken(API.AccountAPI.VALIDATE_TOKEN_URL) {
+                // callback if success
+                presentHome()
             }
         }
     }
 
     fun login(email: String, password: String) {
-        NetworkUtility.handleCall {
-            viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
 
-                Log.i("LOG-IN", "Called LogIn in thread ${Thread.currentThread().name}")
-                val result = repo.accessRequest(
-                    baseURL = API.AccountAPI.LOGIN_URL,
-                    email = email,
-                    password = password
+            Log.i("LOG-IN", "Called LogIn in thread ${Thread.currentThread().name}")
+            val result = repo.accessRequest(
+                baseURL = API.AccountAPI.LOGIN_URL,
+                email = email,
+                password = password
+            )
+
+            if (result == null) {
+                errorMessage = "Access failed!"
+            } else {
+                errorMessage = ""
+
+                Log.i("USER-ACCESS", result.fullName)
+
+                // clean user defaults from previous access
+                repo.cleanUserDefaults()
+
+                // saving user token
+                repo.insert(
+                    UserDefault(
+                        uuid = result.id,
+                        token = result.token,
+                        fullName = result.fullName,
+                        email = result.email
+                    )
                 )
 
-                if (result == null) {
-                    errorMessage = "Access failed!"
-                } else {
-                    errorMessage = ""
+                SessionManager.token = result.token
 
-                    Log.i("USER-ACCESS", result.fullName)
-
-                    // clean user defaults from previous access
-                    repo.cleanUserDefaults()
-
-                    // saving user token
-                    repo.insert(
-                        UserDefault(
-                            uuid = result.id,
-                            token = result.token,
-                            fullName = result.fullName,
-                            email = result.email
-                        )
-                    )
-
-                    SessionManager.token = result.token
-
-                    presentHome()
-                }
+                presentHome()
             }
         }
     }
